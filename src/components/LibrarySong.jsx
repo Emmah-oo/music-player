@@ -11,20 +11,20 @@ const LibrarySong = ({
 }) => {
     const handleSongSelect = () => {
         setCurrentSong(song)
-        // const newSong = songs.map((song) => {
-        //     if (song.id === id) {
-        //         return {
-        //             ...song, 
-        //             active: true,
-        //         }
-        //     } else {
-        //         return {
-        //             ...song, 
-        //             active: false,
-        //         }
-        //     }
-        // })
-        // setSongs(newSong)
+        const newSong = songs.map((song) => {
+            if (song.id === id) {
+                return {
+                    ...song, 
+                    active: true,
+                }
+            } else {
+                return {
+                    ...song, 
+                    active: false,
+                }
+            }
+        })
+        setSongs(newSong)
 
         if (isPlaying) {
             const playPromise = audioRef.current.play()
