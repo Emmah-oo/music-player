@@ -1,0 +1,25 @@
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 80%;
+    margin: 0 auto;
+    min-height: 10vh;
+    button {
+        display: flex;
+        align-items: center;
+        gap: .3rem;
+        cursor: pointer;
+        border: 1px solid #000;
+        background-color: rgb(64, 64, 64);
+        color: #fff;
+        border: 0;
+        padding: .5rem 1rem;
+        transition: background-color 300ms;
+        &:hover {
+            background-color: transparent;
+            border: 1px solid #000;
+            color: #000;
+        }
+    }
+}

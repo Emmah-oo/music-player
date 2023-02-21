@@ -7,7 +7,9 @@ const LibrarySong = ({
     audioRef, 
     isPlaying, 
     setSongs, 
-    id 
+    id,
+    nav,
+    setNav
 }) => {
     const handleSongSelect = () => {
         setCurrentSong(song)
@@ -25,7 +27,7 @@ const LibrarySong = ({
             }
         })
         setSongs(newSong)
-
+        setNav(!nav)
         if (isPlaying) {
             const playPromise = audioRef.current.play()
             if (playPromise !== undefined) {
