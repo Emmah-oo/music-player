@@ -1,14 +1,17 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faAngleLeft, faAngleRight, faPause } from '@fortawesome/free-solid-svg-icons'
+import Song from './Song'
 
 const Player = ({ 
-    currentSong, 
+    currentSong,
+    setCurrentSong, 
     isPlaying, 
     setIsPlaying, 
     audioRef, 
     songInfo, 
-    setSongInfo 
+    setSongInfo,
+    songs 
   }) => {
   //Access the audio tag selected using useRef and access the play & pause functions
   const playSongHandler = () => {
@@ -34,6 +37,18 @@ const Player = ({
     setSongInfo({...songInfo, currentTime: e.target.value})
   }
 
+  const skipHandler = (direction) => {
+    let currentIdx = songs.indexOf(currentSong);
+    if (direction === 'skip-forward') {
+      currentIdx = ((currentIdx + 1) % (songs.length))
+      setCurrentSong(songs[currentIdx])
+    }
+    if (direction === 'skip-back' && currentIdx > 0) {
+      currentIdx = ((currentIdx -1) % (songs.length))
+      setCurrentSong(songs[currentIdx])
+    }
+  }
+
   return ( 
     <div className='player'>
       <div className="time-control">
@@ -42,9 +57,24 @@ const Player = ({
         <p>{timeFormatter(songInfo.duration)}</p>
       </div>
       <div className="play-control">
-        <FontAwesomeIcon className='skip-back' size='2x' icon={faAngleLeft} />
-        <FontAwesomeIcon onClick={playSongHandler} className='play' size='2x' icon={isPlaying ? faPause : faPlay} />
-        <FontAwesomeIcon className='skip-forward' size='2x' icon={faAngleRight} />
+        <FontAwesomeIcon 
+          className='skip-back' 
+          size='2x' 
+          icon={faAngleLeft} 
+          onClick={() => skipHandler('skip-back')}
+        />
+        <FontAwesomeIcon 
+          onClick={playSongHandler} 
+          className='play' 
+          size='2x' 
+          icon={isPlaying ? faPause : faPlay} 
+        />
+        <FontAwesomeIcon 
+          className='skip-forward' 
+          size='2x' 
+          icon={faAngleRight} 
+          onClick={() => skipHandler('skip-forward')}
+        />
       </div>
       
     </div>
