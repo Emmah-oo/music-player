@@ -43,7 +43,11 @@ const Player = ({
       currentIdx = ((currentIdx + 1) % (songs.length))
       setCurrentSong(songs[currentIdx])
     }
-    if (direction === 'skip-back' && currentIdx > 0) {
+    if (direction === 'skip-back') {
+      if ((currentIdx - 1) % (songs.length) === - 1) { 
+        setCurrentSong(songs[songs.length - 1 ]) 
+        return; 
+      }
       currentIdx = ((currentIdx -1) % (songs.length))
       setCurrentSong(songs[currentIdx])
     }
@@ -53,7 +57,7 @@ const Player = ({
     <div className='player'>
       <div className="time-control">
         <p>{timeFormatter(songInfo.currentTime)}</p>
-        <input onChange={draggable} type="range" min={0} max={songInfo.duration} value={songInfo.currentTime}/>
+        <input onChange={draggable} type="range" min={0} max={songInfo.duration || 0} value={songInfo.currentTime}/>
         <p>{timeFormatter(songInfo.duration)}</p>
       </div>
       <div className="play-control">
