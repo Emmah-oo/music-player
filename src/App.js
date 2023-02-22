@@ -9,7 +9,7 @@ import Nav from "./components/Nav";
 import './styles/app.scss'
 
 //IMPORT DATA
-import data from './util'
+import data from './data'
 
 function App() {
   //useRef to select the audio tag
@@ -44,6 +44,7 @@ function App() {
         currentSong = {currentSong}
         setCurrentSong = {setCurrentSong}
         songs = {songs} 
+        setSongs = {setSongs}
       />
       <Library 
         songs = {songs}

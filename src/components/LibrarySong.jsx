@@ -1,41 +1,36 @@
 import React from 'react'
+import { audioPlay } from '../util'
 
 const LibrarySong = ({ 
-    songs, 
     song, 
     setCurrentSong, 
     audioRef, 
     isPlaying, 
-    setSongs, 
-    id,
     nav,
-    setNav
+    setNav,
+    songs,
+    id,
+    setSongs
 }) => {
+
     const handleSongSelect = () => {
         setCurrentSong(song)
-        const newSong = songs.map((song) => {
-            if (song.id === id) {
-                return {
-                    ...song, 
-                    active: true,
-                }
-            } else {
-                return {
-                    ...song, 
-                    active: false,
-                }
-            }
-        })
-        setSongs(newSong)
+        // const newSong = songs.map((song) => {
+        //     if (song.id === id) {
+        //       return {
+        //         ...song, 
+        //         active: true,
+        //       }
+        //     } else {
+        //         return {
+        //           ...song, 
+        //           active: false,
+        //         }
+        //       }
+        //     })
+        //     setSongs(newSong)
+        audioPlay(isPlaying, audioRef)
         setNav(!nav)
-        if (isPlaying) {
-            const playPromise = audioRef.current.play()
-            if (playPromise !== undefined) {
-                playPromise.then((audio) => {
-                    audioRef.current.play()
-                })
-            }
-        }    
     }
 
     return (
